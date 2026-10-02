@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>JACKAL Studios | RedM Development</title>
 
@@ -12,6 +18,11 @@
     >
 
     <style>
+
+        /* =========================================================
+           GLOBAL
+           ========================================================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -26,17 +37,33 @@
             min-height: 100vh;
             font-family: Arial, Helvetica, sans-serif;
             color: #ffffff;
+
             background:
-                radial-gradient(circle at 50% 20%, rgba(150, 0, 0, 0.20), transparent 35%),
-                linear-gradient(135deg, #050505, #0b0b0b 50%, #030303);
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(150, 0, 0, 0.20),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #050505,
+                    #0b0b0b 50%,
+                    #030303
+                );
+
             overflow-x: hidden;
         }
 
         body::before {
+
             content: "";
+
             position: fixed;
+
             inset: 0;
+
             pointer-events: none;
+
             background:
                 linear-gradient(
                     rgba(255,255,255,0.015) 1px,
@@ -47,94 +74,460 @@
                     rgba(255,255,255,0.015) 1px,
                     transparent 1px
                 );
+
             background-size: 50px 50px;
+
+            z-index: -1;
         }
 
         .container {
+
             width: min(1100px, 92%);
+
             margin: auto;
+
         }
 
-        /* NAVIGATION */
+        .red {
+            color: #b00000;
+        }
 
-        nav {
+        /* =========================================================
+           PREMIUM ANIMATED JACKAL BACKGROUND
+           ========================================================= */
+
+        .jackal-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(110,0,0,.16), transparent 42%),
+                radial-gradient(circle at 15% 85%, rgba(80,0,0,.12), transparent 35%),
+                #020202;
+        }
+
+        .jackal-bg::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background:
+                linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+            background-size: 55px 55px;
+            transform: perspective(700px) rotateX(58deg) translateY(8%);
+            transform-origin: center bottom;
+            animation: gridMove 18s linear infinite;
+            opacity: .55;
+        }
+
+        .jackal-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,.72) 100%);
+        }
+
+        .red-orb {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(180,0,0,.24), rgba(120,0,0,.08) 38%, transparent 72%);
+            filter: blur(12px);
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+
+        .orb-one { top: -130px; left: -100px; }
+        .orb-two { right: -140px; top: 25%; animation-delay: -4s; animation-duration: 15s; }
+        .orb-three { left: 28%; bottom: -220px; animation-delay: -8s; animation-duration: 17s; }
+
+        .red-beam {
+            position: absolute;
+            width: 70%;
+            height: 180px;
+            left: -20%;
+            top: 20%;
+            background: linear-gradient(90deg, transparent, rgba(180,0,0,.11), transparent);
+            filter: blur(28px);
+            transform: rotate(-12deg);
+            animation: beamMove 13s ease-in-out infinite;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255,70,70,.7);
+            box-shadow: 0 0 12px rgba(255,0,0,.55);
+            animation: particleRise linear infinite;
+        }
+
+        .p1 { left: 8%; bottom: -10px; animation-duration: 12s; animation-delay: -2s; }
+        .p2 { left: 18%; bottom: -10px; animation-duration: 17s; animation-delay: -8s; }
+        .p3 { left: 31%; bottom: -10px; animation-duration: 14s; animation-delay: -4s; }
+        .p4 { left: 47%; bottom: -10px; animation-duration: 19s; animation-delay: -11s; }
+        .p5 { left: 59%; bottom: -10px; animation-duration: 13s; animation-delay: -6s; }
+        .p6 { left: 72%; bottom: -10px; animation-duration: 16s; animation-delay: -3s; }
+        .p7 { left: 84%; bottom: -10px; animation-duration: 21s; animation-delay: -13s; }
+        .p8 { left: 93%; bottom: -10px; animation-duration: 15s; animation-delay: -9s; }
+        .p9 { left: 14%; bottom: -10px; width: 2px; height: 2px; animation-duration: 18s; animation-delay: -7s; }
+        .p10 { left: 26%; bottom: -10px; width: 2px; height: 2px; animation-duration: 11s; animation-delay: -1s; }
+        .p11 { left: 39%; bottom: -10px; width: 4px; height: 4px; animation-duration: 22s; animation-delay: -15s; }
+        .p12 { left: 64%; bottom: -10px; width: 2px; height: 2px; animation-duration: 12s; animation-delay: -5s; }
+        .p13 { left: 78%; bottom: -10px; width: 3px; height: 3px; animation-duration: 20s; animation-delay: -12s; }
+        .p14 { left: 88%; bottom: -10px; width: 2px; height: 2px; animation-duration: 16s; animation-delay: -4s; }
+
+        @keyframes gridMove {
+            from { background-position: 0 0, 0 0; }
+            to { background-position: 0 55px, 55px 0; }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .55; }
+            50% { transform: translate3d(80px,45px,0) scale(1.18); opacity: .9; }
+        }
+
+        @keyframes beamMove {
+            0%, 100% { transform: translateX(-20%) rotate(-12deg); opacity: .2; }
+            50% { transform: translateX(125%) rotate(-12deg); opacity: .75; }
+        }
+
+        @keyframes particleRise {
+            0% { transform: translate3d(0,20px,0) scale(.4); opacity: 0; }
+            15% { opacity: .8; }
+            70% { opacity: .45; }
+            100% { transform: translate3d(30px,-105vh,0) scale(1); opacity: 0; }
+        }
+
+        .ambient-streak {
+            position: absolute;
+            width: 46vw;
+            min-width: 320px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, rgba(255,65,65,.5), rgba(255,160,160,.12), transparent);
+            filter: blur(.2px) drop-shadow(0 0 10px rgba(255,0,0,.25));
+            opacity: .55;
+            transform: rotate(-18deg) translateX(-130%);
+            animation: streakRun 11s linear infinite;
+        }
+
+        .streak-one { top: 24%; left: -8%; animation-delay: -2s; }
+        .streak-two { top: 58%; left: 18%; width: 34vw; animation-delay: -6s; animation-duration: 14s; }
+        .streak-three { top: 79%; left: -12%; width: 52vw; animation-delay: -9s; animation-duration: 17s; opacity: .38; }
+
+        @keyframes streakRun {
+            0% { transform: rotate(-18deg) translateX(-130%); opacity: 0; }
+            8% { opacity: .6; }
+            50% { opacity: .55; }
+            92% { opacity: .15; }
+            100% { transform: rotate(-18deg) translateX(245%); opacity: 0; }
+        }
+
+        .ambient-pulse {
+            position: absolute;
+            width: 18vmin;
+            height: 18vmin;
+            border-radius: 50%;
+            border: 1px solid rgba(255,60,60,.18);
+            box-shadow: 0 0 35px rgba(180,0,0,.10), inset 0 0 35px rgba(180,0,0,.08);
+            animation: pulseRing 5.5s ease-out infinite;
+        }
+
+        .pulse-one { top: 34%; left: 12%; animation-delay: -1s; }
+        .pulse-two { top: 72%; right: 10%; animation-delay: -3.4s; animation-duration: 7s; }
+
+        @keyframes pulseRing {
+            0% { transform: scale(.45); opacity: 0; }
+            18% { opacity: .5; }
+            70% { opacity: .14; }
+            100% { transform: scale(1.55); opacity: 0; }
+        }
+
+        .screen-sweep {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,35,35,.05) 48%, transparent 54%);
+            transform: translateY(-120%);
+            animation: screenSweep 9s ease-in-out infinite;
+            mix-blend-mode: screen;
+            opacity: .45;
+        }
+
+        @keyframes screenSweep {
+            0%, 55% { transform: translateY(-120%); opacity: 0; }
+            62% { opacity: .45; }
+            78% { transform: translateY(120%); opacity: .08; }
+            100% { transform: translateY(120%); opacity: 0; }
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            transform: translate3d(calc(var(--cursor-x, 50vw) - 160px), calc(var(--cursor-y, 50vh) - 160px), 0);
+            background: radial-gradient(circle, rgba(185,0,0,.16), rgba(110,0,0,.07) 34%, transparent 72%);
+            filter: blur(10px);
+            opacity: .7;
+            transition: transform .12s ease-out;
+        }
+
+        .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
+            width: 0;
+            height: 2px;
+            z-index: 1200;
+            background: linear-gradient(90deg, #650000, #d00000, #ff5656);
+            box-shadow: 0 0 12px rgba(255,0,0,.45);
+            transition: width .08s linear;
+            pointer-events: none;
+        }
+
+        section, .work-section {
+            position: relative;
+        }
+
+        section::after, .work-section::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: min(760px, 70%);
+            height: 1px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, transparent, rgba(176,0,0,.25), transparent);
+            opacity: .55;
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(24px) scale(.985);
+            transition: opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1);
+        }
+
+        .reveal-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .card, .work-card, .team-card, .ecosystem-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before, .work-card::before, .team-card::before, .ecosystem-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,80,80,.08), transparent);
+            transform: skewX(-18deg);
+            transition: left .8s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::before, .work-card:hover::before, .team-card:hover::before, .ecosystem-card:hover::before {
+            left: 150%;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .brand img {
+                animation: none !important;
+                translate: 0 0 !important;
+                transform: none !important;
+            }
+            .jackal-bg *, .jackal-bg::before, .red-orb, .red-beam, .particle, .ambient-streak, .ambient-pulse, .screen-sweep { animation: none !important; }
+            .reveal-on-scroll { opacity: 1 !important; transform: none !important; }
+            .cursor-glow { display: none !important; }
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
+
+        nav {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
             width: 100%;
+
             z-index: 1000;
+
             padding: 20px 0;
+
             background: rgba(0, 0, 0, 0.65);
+
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+
         }
 
         .nav-inner {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
         }
 
         .brand {
+
             display: flex;
+
             align-items: center;
+
             gap: 12px;
+
             font-weight: 800;
+
             letter-spacing: 2px;
+
+            white-space: nowrap;
+
         }
 
         .brand img {
+
             width: 42px;
             height: 42px;
+
             border-radius: 50%;
+
             object-fit: cover;
-            border: 1px solid rgba(255,255,255,0.15);
+
+            border:
+                2px solid rgba(255,0,0,0.18);
+
+            box-shadow:
+                0 0 0 1px rgba(255,0,0,0.05),
+                0 0 18px rgba(176,0,0,0.28),
+                0 0 40px rgba(176,0,0,0.10);
+
+            translate: 0 0;
+
+            animation:
+                logoFloat 4s ease-in-out infinite;
+
+            transition:
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+
+        }
+
+        .brand img:hover {
+
+            border-color: rgba(255,0,0,0.42);
+
+            box-shadow:
+                0 0 0 2px rgba(255,0,0,0.08),
+                0 0 24px rgba(255,0,0,0.42),
+                0 0 55px rgba(176,0,0,0.18);
+
         }
 
         .nav-links {
+
             display: flex;
-            gap: 28px;
+
+            gap: 24px;
+
         }
 
         .nav-links a {
+
             color: #aaa;
+
             text-decoration: none;
-            font-size: 14px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
             transition: 0.2s;
+
         }
 
         .nav-links a:hover {
-            color: #fff;
+
+            color: #ffffff;
+
         }
 
-        /* HERO */
+
+        /* =========================================================
+           HERO
+           ========================================================= */
 
         .hero {
+
             min-height: 100vh;
+
             display: flex;
+
             align-items: center;
+
             text-align: center;
-            padding-top: 100px;
+
+            padding-top: 110px;
+
+            padding-bottom: 80px;
+
         }
 
         .hero-content {
+
             width: 100%;
+
         }
 
         .logo {
+
             width: 155px;
             height: 155px;
+
             object-fit: cover;
+
             border-radius: 50%;
+
             margin-bottom: 28px;
-            border: 2px solid rgba(255,255,255,0.15);
+
+            border:
+                2px solid rgba(255,255,255,0.15);
+
             box-shadow:
-                0 0 30px rgba(150, 0, 0, 0.30),
-                0 0 80px rgba(150, 0, 0, 0.10);
-            animation: float 4s ease-in-out infinite;
+                0 0 30px rgba(150,0,0,0.30),
+                0 0 80px rgba(150,0,0,0.10);
+
+            animation:
+                float 4s ease-in-out infinite;
+
         }
 
         @keyframes float {
+
             0%, 100% {
                 transform: translateY(0);
             }
@@ -142,657 +535,1766 @@
             50% {
                 transform: translateY(-8px);
             }
+
+        }
+
+        @keyframes logoFloat {
+
+            0%, 100% {
+                translate: 0 0;
+            }
+
+            50% {
+                translate: 0 -7px;
+            }
+
         }
 
         .eyebrow {
+
             color: #aaa;
+
             font-size: 13px;
+
             font-weight: 700;
+
             letter-spacing: 4px;
+
             margin-bottom: 18px;
+
         }
 
         h1 {
-            font-size: clamp(48px, 9vw, 92px);
-            letter-spacing: 7px;
-            line-height: 1;
-            font-weight: 900;
-        }
 
-        .red {
-            color: #b00000;
+            font-size:
+                clamp(48px, 9vw, 92px);
+
+            letter-spacing: 7px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
         }
 
         .tagline {
+
             margin: 24px auto;
+
             max-width: 650px;
+
             color: #aaa;
+
             font-size: 18px;
+
             line-height: 1.7;
+
         }
 
+
+        /* =========================================================
+           CINEMATIC HERO
+           ========================================================= */
+
+        .hero {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            --hero-mx: 0px;
+            --hero-my: 0px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            pointer-events: none;
+            z-index: -5;
+            background:
+                radial-gradient(circle at 50% 42%, rgba(255,0,0,.16), transparent 22%),
+                radial-gradient(circle at 18% 55%, rgba(150,0,0,.12), transparent 24%),
+                radial-gradient(circle at 82% 30%, rgba(255,20,20,.10), transparent 22%);
+            filter: blur(22px);
+            animation: heroAtmosphere 10s ease-in-out infinite alternate;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -12%;
+            width: 130%;
+            height: 34%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: -4;
+            background: linear-gradient(180deg, transparent, rgba(176,0,0,.09), transparent);
+            filter: blur(16px);
+            animation: heroHorizon 7s ease-in-out infinite;
+        }
+
+        .hero-cinematic {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: -3;
+            overflow: hidden;
+        }
+
+        .hero-beam {
+            position: absolute;
+            top: -25%;
+            width: 18%;
+            height: 160%;
+            opacity: .16;
+            filter: blur(12px);
+            background: linear-gradient(90deg, transparent, rgba(255,0,0,.38), transparent);
+            transform-origin: 50% 20%;
+            mix-blend-mode: screen;
+        }
+
+        .hero-beam.one {
+            left: 8%;
+            transform: rotate(14deg) translateX(var(--hero-mx));
+            animation: beamSweepOne 9s ease-in-out infinite;
+        }
+
+        .hero-beam.two {
+            right: 7%;
+            width: 13%;
+            opacity: .13;
+            transform: rotate(-16deg) translateX(calc(var(--hero-mx) * -1));
+            animation: beamSweepTwo 11s ease-in-out infinite;
+        }
+
+        .hero-fog {
+            position: absolute;
+            width: 65%;
+            height: 24%;
+            left: 50%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(176,0,0,.15), transparent 68%);
+            filter: blur(18px);
+            opacity: .9;
+        }
+
+        .hero-fog.one {
+            top: 17%;
+            animation: fogDriftOne 8s ease-in-out infinite;
+        }
+
+        .hero-fog.two {
+            top: 57%;
+            width: 78%;
+            opacity: .55;
+            animation: fogDriftTwo 12s ease-in-out infinite;
+        }
+
+        .hero-ring {
+            position: absolute;
+            left: 50%;
+            top: 25%;
+            width: 280px;
+            height: 280px;
+            border: 1px solid rgba(255,0,0,.16);
+            border-radius: 50%;
+            transform: translate3d(calc(-50% + var(--hero-mx)), calc(-5% + var(--hero-my)), 0) scale(.95);
+            box-shadow:
+                0 0 40px rgba(176,0,0,.10),
+                inset 0 0 35px rgba(176,0,0,.05);
+            animation: ringPulse 5s ease-in-out infinite;
+        }
+
+        .hero-ring::before,
+        .hero-ring::after {
+            content: "";
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(255,40,40,.10);
+            border-radius: 50%;
+        }
+
+        .hero-ring::after {
+            inset: 34px;
+            border-color: rgba(255,40,40,.07);
+        }
+
+        .hero-energy {
+            position: absolute;
+            left: 50%;
+            top: 37%;
+            width: min(82vw, 900px);
+            height: 1px;
+            transform: translate3d(calc(-50% + var(--hero-mx)), var(--hero-my), 0);
+            background: linear-gradient(90deg, transparent, rgba(255,0,0,.04), rgba(255,0,0,.55), rgba(255,0,0,.04), transparent);
+            box-shadow: 0 0 18px rgba(176,0,0,.25);
+            animation: energyPulse 4.5s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            transform: translate3d(calc(var(--hero-mx) * .12), calc(var(--hero-my) * .12), 0);
+            transition: transform .2s ease-out;
+        }
+
+        .hero-logo-motion {
+            position: relative;
+            display: inline-block;
+            transform: none;
+            animation: jackalLogoFloat 3.2s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .hero .logo {
+            position: relative;
+            display: block;
+            animation: none;
+            transform: none;
+            translate: none;
+            transition: box-shadow .3s ease;
+            box-shadow:
+                0 0 0 1px rgba(255,0,0,.06),
+                0 0 32px rgba(176,0,0,.38),
+                0 0 90px rgba(176,0,0,.16);
+        }
+
+        .hero .logo:hover {
+            box-shadow:
+                0 0 0 2px rgba(255,0,0,.08),
+                0 0 40px rgba(255,0,0,.48),
+                0 0 110px rgba(176,0,0,.22);
+        }
+
+        .hero h1 {
+            text-shadow:
+                0 0 14px rgba(255,255,255,.04),
+                0 0 34px rgba(176,0,0,.10);
+        }
+
+        .hero h1 .red {
+            background: linear-gradient(90deg, #7d0000, #ff2020, #8f0000);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleRedFlow 4s linear infinite;
+        }
+
+        .hero .eyebrow {
+            position: relative;
+        }
+
+        .hero .eyebrow::before,
+        .hero .eyebrow::after {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            width: 42px;
+            height: 1px;
+            margin: 0 14px;
+            background: linear-gradient(90deg, transparent, rgba(176,0,0,.7));
+            box-shadow: 0 0 10px rgba(176,0,0,.35);
+        }
+
+        .hero .eyebrow::after {
+            background: linear-gradient(90deg, rgba(176,0,0,.7), transparent);
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%);
+            width: 26px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 20px;
+            opacity: .7;
+            z-index: 3;
+        }
+
+        .hero-scroll-indicator::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 50%;
+            width: 4px;
+            height: 8px;
+            border-radius: 4px;
+            background: #b00000;
+            box-shadow: 0 0 10px rgba(176,0,0,.8);
+            transform: translateX(-50%);
+            animation: scrollDot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes heroAtmosphere {
+            0% { transform: scale(1) translate3d(-2%, -1%, 0); opacity: .75; }
+            100% { transform: scale(1.08) translate3d(2%, 1%, 0); opacity: 1; }
+        }
+
+        @keyframes heroHorizon {
+            0%,100% { opacity: .35; transform: translateX(-50%) translateY(0); }
+            50% { opacity: .75; transform: translateX(-50%) translateY(-18px); }
+        }
+
+        @keyframes beamSweepOne {
+            0%,100% { margin-left: -3%; opacity: .08; }
+            50% { margin-left: 10%; opacity: .22; }
+        }
+
+        @keyframes beamSweepTwo {
+            0%,100% { margin-right: -2%; opacity: .06; }
+            50% { margin-right: 10%; opacity: .18; }
+        }
+
+        @keyframes fogDriftOne {
+            0%,100% { transform: translateX(-50%) translate3d(-3%, 0, 0) scale(.95); }
+            50% { transform: translateX(-50%) translate3d(4%, -10px, 0) scale(1.05); }
+        }
+
+        @keyframes fogDriftTwo {
+            0%,100% { transform: translateX(-50%) translate3d(5%, 0, 0) scale(1); }
+            50% { transform: translateX(-50%) translate3d(-5%, 8px, 0) scale(1.08); }
+        }
+
+        @keyframes ringPulse {
+            0%,100% { opacity: .42; transform: translate3d(calc(-50% + var(--hero-mx)), calc(-5% + var(--hero-my)), 0) scale(.94); }
+            50% { opacity: .78; transform: translate3d(calc(-50% + var(--hero-mx)), calc(-5% + var(--hero-my)), 0) scale(1.04); }
+        }
+
+        @keyframes energyPulse {
+            0%,100% { opacity: .25; transform: translate3d(calc(-50% + var(--hero-mx)), var(--hero-my), 0) scaleX(.82); }
+            50% { opacity: .9; transform: translate3d(calc(-50% + var(--hero-mx)), var(--hero-my), 0) scaleX(1); }
+        }
+
+        @keyframes titleRedFlow {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes scrollDot {
+            0% { transform: translate(-50%, 0); opacity: .2; }
+            45% { opacity: 1; }
+            100% { transform: translate(-50%, 16px); opacity: 0; }
+        }
+
+        @media (max-width: 700px) {
+            .hero-ring { width: 210px; height: 210px; top: 28%; }
+            .hero-beam { opacity: .08; }
+            .hero .eyebrow::before,
+            .hero .eyebrow::after { width: 18px; margin: 0 7px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero::before,
+            .hero::after,
+            .hero-beam,
+            .hero-fog,
+            .hero-ring,
+            .hero-energy,
+            .hero h1 .red,
+            .hero-scroll-indicator::before {
+                animation: none !important;
+            }
+            .hero-content {
+                transform: none !important;
+            }
+            /* Keep the JACKAL logos animated even when reduced-motion is enabled. */
+            .hero-logo-motion {
+                transform: none;
+            }
+            .hero .logo {
+                transform: none;
+            }
+            .ecosystem-logo {
+                transform: none;
+            }
+        }
+
+
+        /* =========================================================
+           PREMIUM BUTTONS
+           ========================================================= */
+
         .buttons {
+
             display: flex;
+
             justify-content: center;
+
             gap: 14px;
+
             flex-wrap: wrap;
+
             margin-top: 35px;
+
         }
 
         .button {
+
+            position: relative;
+
+            isolation: isolate;
+
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
-            min-width: 190px;
-            padding: 15px 25px;
-            border-radius: 8px;
+
+            min-width: 205px;
+
+            min-height: 52px;
+
+            padding: 15px 28px;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
             text-decoration: none;
-            font-weight: 800;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: 0.25s;
+
+            font-weight: 900;
+
+            font-size: 13px;
+
+            letter-spacing: 1.6px;
+
+            color: #fff;
+
+            cursor: pointer;
+            will-change: transform, box-shadow;
+
+            transform: translateY(0);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
+
+        }
+
+        /* animated shine */
+        .button::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -60%;
+            left: -80%;
+
+            width: 45%;
+            height: 220%;
+
+            z-index: -1;
+
+            transform: rotate(22deg);
+
+            background: rgba(255,255,255,0.18);
+
+            filter: blur(2px);
+
+            transition: left 0.65s ease;
+
+        }
+
+        .button:hover::before {
+            left: 135%;
+        }
+
+        .button::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 1px;
+
+            z-index: -1;
+
+            border-radius: 9px;
+
+            pointer-events: none;
+
         }
 
         .button-primary {
-            color: white;
-            background: #8f0000;
-            border: 1px solid #b00000;
-            box-shadow: 0 10px 30px rgba(120,0,0,0.25);
+
+            background:
+                linear-gradient(135deg, #650000, #b00000 52%, #720000);
+
+            border: 1px solid rgba(255,70,70,0.65);
+
+            box-shadow:
+                0 8px 25px rgba(120,0,0,0.32),
+                inset 0 1px 0 rgba(255,255,255,0.12);
+
+        }
+
+        .button-primary::after {
+
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.06), transparent 48%);
+
         }
 
         .button-primary:hover {
-            transform: translateY(-3px);
-            background: #b00000;
-            box-shadow: 0 15px 40px rgba(180,0,0,0.35);
+
+            transform: translateY(-4px) scale(1.025);
+
+            background:
+                linear-gradient(135deg, #850000, #d00000 52%, #900000);
+
+            border-color: #ff3b3b;
+
+            box-shadow:
+                0 14px 40px rgba(190,0,0,0.42),
+                0 0 25px rgba(190,0,0,0.22),
+                inset 0 1px 0 rgba(255,255,255,0.18);
+
         }
 
         .button-secondary {
-            color: white;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.12);
+
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+
+            border: 1px solid rgba(255,255,255,0.16);
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(10px);
+
+        }
+
+        .button-secondary::after {
+
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.045), transparent 50%);
+
         }
 
         .button-secondary:hover {
-            transform: translateY(-3px);
-            background: rgba(255,255,255,0.08);
-        }
-        /* DISCORD COMMUNITY */
 
-        .discord-panel {
-            max-width: 850px;
-            margin: 45px auto 0;
-            padding: 24px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 25px;
-            text-align: left;
+            transform: translateY(-4px) scale(1.025);
+
             background:
-                linear-gradient(
-                    135deg,
-                    rgba(140, 0, 0, 0.16),
-                    rgba(255,255,255,0.025)
-                );
-            border: 1px solid rgba(176,0,0,0.25);
-            border-radius: 14px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+                linear-gradient(135deg, rgba(176,0,0,0.20), rgba(255,255,255,0.055));
+
+            border-color: rgba(255,55,55,0.65);
+
+            box-shadow:
+                0 14px 40px rgba(0,0,0,0.38),
+                0 0 24px rgba(176,0,0,0.16),
+                inset 0 1px 0 rgba(255,255,255,0.12);
+
         }
 
-        .discord-info {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
+        .button:active {
 
-        .discord-icon {
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 25px;
-            border-radius: 12px;
-            background: rgba(176,0,0,0.16);
-            border: 1px solid rgba(176,0,0,0.3);
-        }
+            transform: translateY(-1px) scale(0.99);
 
-        .discord-info h3 {
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .discord-info p {
-            color: #777;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .discord-online {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 7px;
-            color: #999;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .discord-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #43b581;
-            box-shadow: 0 0 10px rgba(67,181,129,0.6);
         }
 
         .discord-panel .button {
-            min-width: 155px;
+
+            min-width: 165px;
+
             flex-shrink: 0;
+
         }
-        /* STATS */
+
+
+        /* =========================================================
+           DISCORD COMMUNITY
+           ========================================================= */
+
+        .discord-panel {
+
+            max-width: 850px;
+
+            margin: 45px auto 0;
+
+            padding: 24px 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            text-align: left;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(140,0,0,0.16),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(176,0,0,0.25);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 15px 50px rgba(0,0,0,0.25);
+
+        }
+
+        .discord-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+        .discord-icon {
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            font-size: 25px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(176,0,0,0.16);
+
+            border:
+                1px solid rgba(176,0,0,0.3);
+
+        }
+
+        .discord-info h3 {
+
+            margin-bottom: 5px;
+
+            font-size: 16px;
+
+        }
+
+        .discord-info p {
+
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+        .discord-online {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 7px;
+
+            color: #999;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+        .discord-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #43b581;
+
+            box-shadow:
+                0 0 10px rgba(67,181,129,0.6);
+
+        }
+
+        .discord-panel .button {
+
+            min-width: 155px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        /* =========================================================
+           DEVELOPMENT STATUS
+           ========================================================= */
+
+        .status-panel {
+
+            max-width: 850px;
+
+            margin: 25px auto 0;
+
+            padding: 24px 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(176,0,0,0.10),
+                    rgba(255,255,255,0.02)
+                );
+
+            border:
+                1px solid rgba(176,0,0,0.20);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 15px 50px rgba(0,0,0,0.25);
+
+        }
+
+        .status-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+
+        }
+
+        .status-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+        }
+
+        .status-live {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #888;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+        }
+
+        .status-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 10px;
+
+        }
+
+        .status-item {
+
+            padding: 15px 10px;
+
+            text-align: center;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+
+            border-radius: 9px;
+
+        }
+
+        .status-indicator {
+
+            width: 7px;
+            height: 7px;
+
+            margin: 0 auto 9px;
+
+            border-radius: 50%;
+
+            background: #43b581;
+
+            box-shadow:
+                0 0 10px rgba(67,181,129,0.65);
+
+            animation:
+                statusPulse 2s ease-in-out infinite;
+
+        }
+
+        .status-item strong {
+
+            display: block;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 4px;
+
+        }
+
+        .status-item span {
+
+            color: #666;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+
+        }
+
+        @keyframes statusPulse {
+
+            0%, 100% {
+
+                opacity: 1;
+
+                box-shadow:
+                    0 0 10px
+                    rgba(67,181,129,0.65);
+
+            }
+
+            50% {
+
+                opacity: 0.45;
+
+                box-shadow:
+                    0 0 4px
+                    rgba(67,181,129,0.25);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           STATS
+           ========================================================= */
 
         .stats {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 15px;
+
             max-width: 700px;
+
             margin: 70px auto 0;
+
         }
 
         .stat {
+
             padding: 22px;
-            background: rgba(255,255,255,0.035);
-            border: 1px solid rgba(255,255,255,0.07);
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.07);
+
             border-radius: 10px;
+
         }
 
         .stat strong {
+
             display: block;
+
             font-size: 24px;
+
             margin-bottom: 5px;
+
         }
 
         .stat span {
+
             color: #777;
+
             font-size: 12px;
+
             text-transform: uppercase;
+
             letter-spacing: 1px;
+
         }
 
-        /* SERVICES */
+
+        /* =========================================================
+           GENERAL SECTIONS
+           ========================================================= */
 
         section {
+
             padding: 110px 0;
+
         }
 
         .section-title {
+
             text-align: center;
+
             margin-bottom: 50px;
+
         }
 
         .section-title h2 {
+
             font-size: 38px;
+
             margin-bottom: 12px;
+
         }
 
         .section-title p {
+
             color: #777;
+
         }
 
+
+        /* =========================================================
+           CARDS
+           ========================================================= */
+
         .cards {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 18px;
+
         }
 
         .card {
+
             padding: 30px;
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,0.05),
-                rgba(255,255,255,0.015)
-            );
-            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.05),
+                    rgba(255,255,255,0.015)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
             border-radius: 12px;
+
             transition: 0.25s;
+
         }
 
         .card:hover {
+
             transform: translateY(-5px);
-            border-color: rgba(176,0,0,0.45);
+
+            border-color:
+                rgba(176,0,0,0.45);
+
         }
 
         .card-icon {
+
             font-size: 30px;
+
             margin-bottom: 20px;
+
         }
 
         .card h3 {
+
             margin-bottom: 12px;
+
         }
 
         .card p {
+
             color: #888;
+
             line-height: 1.7;
+
             font-size: 14px;
+
         }
 
-        /* CTA */
+
+        /* =========================================================
+           WORK WITH JACKAL
+           ========================================================= */
+
+        .work-section {
+
+            padding: 110px 0;
+
+        }
+
+        .work-header {
+
+            text-align: center;
+
+            max-width: 760px;
+
+            margin:
+                0 auto 55px;
+
+        }
+
+        .work-header h2 {
+
+            font-size:
+                clamp(34px,5vw,58px);
+
+            margin-bottom: 18px;
+
+        }
+
+        .work-header p {
+
+            color: #777;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+        }
+
+        .work-grid {
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 18px;
+
+        }
+
+        .work-card {
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(176,0,0,0.10),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(176,0,0,0.18);
+
+            border-radius: 14px;
+
+            transition: 0.25s;
+
+        }
+
+        .work-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(176,0,0,0.55);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.35);
+
+        }
+
+        .work-icon {
+
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            background:
+                rgba(176,0,0,0.12);
+
+            border:
+                1px solid rgba(176,0,0,0.25);
+
+            border-radius: 10px;
+
+            font-size: 20px;
+
+        }
+
+        .work-card h3 {
+
+            font-size: 16px;
+
+            margin-bottom: 10px;
+
+            letter-spacing: 0.5px;
+
+        }
+
+        .work-card p {
+
+            color: #707070;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+        .work-cta {
+
+            max-width: 1050px;
+
+            margin:
+                35px auto 0;
+
+            padding: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(176,0,0,0.14),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(176,0,0,0.22);
+
+            border-radius: 14px;
+
+        }
+
+        .work-cta h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 7px;
+
+        }
+
+        .work-cta p {
+
+            color: #707070;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =========================================================
+           TEAM
+           ========================================================= */
+
+        .team-section {
+
+            padding: 110px 0;
+
+        }
+
+        .team-header {
+
+            text-align: center;
+
+            max-width: 760px;
+
+            margin:
+                0 auto 55px;
+
+        }
+
+        .team-header h2 {
+
+            font-size:
+                clamp(34px,5vw,58px);
+
+            margin-bottom: 18px;
+
+        }
+
+        .team-header p {
+
+            color: #777;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+        }
+
+        .team-grid {
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 18px;
+
+        }
+
+        .team-card {
+
+            padding: 30px 24px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(176,0,0,0.08),
+                    rgba(255,255,255,0.02)
+                );
+
+            border:
+                1px solid rgba(176,0,0,0.16);
+
+            border-radius: 14px;
+
+            transition: 0.25s;
+
+        }
+
+        .team-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(176,0,0,0.50);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.35);
+
+        }
+
+        .team-icon {
+
+            width: 62px;
+            height: 62px;
+
+            margin:
+                0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(176,0,0,0.12);
+
+            border:
+                1px solid rgba(176,0,0,0.25);
+
+            font-size: 26px;
+
+        }
+
+        .team-card h3 {
+
+            font-size: 14px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .team-card p {
+
+            color: #707070;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================================================
+           ECOSYSTEM
+           ========================================================= */
+
+        .ecosystem-section {
+
+            padding: 110px 0;
+
+        }
+
+        .ecosystem-header {
+
+            text-align: center;
+
+            max-width: 760px;
+
+            margin:
+                0 auto 55px;
+
+        }
+
+        .ecosystem-header h2 {
+
+            font-size:
+                clamp(34px,5vw,58px);
+
+            margin-bottom: 18px;
+
+        }
+
+        .ecosystem-header p {
+
+            color: #777;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+        }
+
+        .ecosystem {
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            padding: 45px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(176,0,0,0.12),
+                    transparent 48%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(176,0,0,0.05)
+                );
+
+            border:
+                1px solid rgba(176,0,0,0.20);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,0.35);
+
+        }
+
+        .ecosystem-center {
+
+            width: 190px;
+            height: 190px;
+
+            margin:
+                0 auto 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(176,0,0,0.25),
+                    rgba(10,10,10,0.95) 68%
+                );
+
+            border:
+                2px solid rgba(176,0,0,0.45);
+
+            box-shadow:
+                0 0 50px
+                rgba(176,0,0,0.16);
+
+        }
+
+        .ecosystem-logo {
+
+            width: 118px;
+            height: 118px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            display: block;
+
+            border: 2px solid rgba(255,255,255,0.15);
+
+            box-shadow:
+                0 0 24px rgba(176,0,0,0.38),
+                0 0 65px rgba(176,0,0,0.14);
+
+            animation:
+                ecosystemLogoFloat 3.2s ease-in-out infinite;
+
+            transition:
+                box-shadow .3s ease,
+                transform .3s ease;
+
+        }
+
+        .ecosystem-logo:hover {
+
+            box-shadow:
+                0 0 30px rgba(255,0,0,0.52),
+                0 0 80px rgba(176,0,0,0.22);
+
+        }
+
+        @keyframes ecosystemLogoFloat {
+
+            0%, 100% {
+                transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translate3d(0, -14px, 0) rotate(1.2deg) scale(1.025);
+            }
+
+        }
+
+        @keyframes jackalLogoFloat {
+
+            0%, 100% {
+                transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translate3d(0, -14px, 0) rotate(1.2deg) scale(1.025);
+            }
+
+        }
+
+        .ecosystem-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 18px;
+
+        }
+
+        .ecosystem-card {
+
+            padding: 28px 22px;
+
+            text-align: center;
+
+            background:
+                rgba(0,0,0,0.35);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+
+            border-radius: 13px;
+
+            transition: 0.25s;
+
+        }
+
+        .ecosystem-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(176,0,0,0.50);
+
+        }
+
+        .ecosystem-icon {
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .ecosystem-card h3 {
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 9px;
+
+        }
+
+        .ecosystem-card p {
+
+            color: #666;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            margin-bottom: 18px;
+
+        }
+
+        .ecosystem-link {
+
+            color: #b00000;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-decoration: none;
+
+        }
+
+        .ecosystem-link:hover {
+
+            color: #ffffff;
+
+        }
+
+        .ecosystem-bottom {
+
+            margin-top: 35px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.06);
+
+            text-align: center;
+
+        }
+
+        .ecosystem-bottom strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 7px;
+
+        }
+
+        .ecosystem-bottom span {
+
+            color: #666;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* =========================================================
+           COMMUNITY CTA
+           ========================================================= */
 
         .cta {
+
             text-align: center;
+
             padding: 90px 30px;
+
             background:
                 radial-gradient(
                     circle,
                     rgba(130,0,0,0.18),
                     transparent 65%
                 );
-            border-top: 1px solid rgba(255,255,255,0.06);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+
+            border-top:
+                1px solid rgba(255,255,255,0.06);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+
         }
 
         .cta h2 {
+
             font-size: 42px;
+
             margin-bottom: 15px;
+
         }
 
         .cta p {
+
             color: #888;
+
             margin-bottom: 30px;
+
         }
 
-        /* FOOTER */
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
 
         footer {
+
             padding: 35px 0;
+
             text-align: center;
+
             color: #555;
+
             font-size: 13px;
+
         }
 
         footer strong {
+
             color: #888;
+
         }
 
-        /* MOBILE */
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
 
         @media (max-width: 800px) {
-            .discord-panel {
-                flex-direction: column;
-                text-align: center;
-            }
 
-            .discord-info {
-                flex-direction: column;
-            }
-
-            .discord-panel .button {
-                width: 100%;
-            }
             .nav-links {
                 display: none;
             }
 
+            .discord-panel {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+            .discord-info {
+
+                flex-direction: column;
+
+            }
+
+            .discord-panel .button {
+
+                width: 100%;
+
+            }
+
+            .status-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+            .status-header {
+
+                flex-direction: column;
+
+                gap: 10px;
+
+                text-align: center;
+
+            }
+
             .stats {
+
                 grid-template-columns: 1fr;
+
             }
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                letter-spacing: 4px;
-            }
-
-            .tagline {
-                font-size: 16px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- NAVIGATION -->
-
-    <nav>
-        <div class="container nav-inner">
-
-            <div class="brand">
-
-                <img
-                    src="https://cdn.discordapp.com/icons/1526831219373772901/83d5b85c1210f8da072c957d61025b81.webp?size=1024"
-                    alt="JACKAL Studios"
-                >
-
-                JACKAL STUDIOS
-
-            </div>
-
-            <div class="nav-links">
-
-                <a href="#about">ABOUT</a>
-                <a href="#services">DEVELOPMENT</a>
-                <a href="#community">COMMUNITY</a>
-
-            </div>
-
-        </div>
-    </nav>
-
-
-    <!-- HERO -->
-
-    <main class="hero">
-
-        <div class="container hero-content">
-
-            <img
-                class="logo"
-                src="https://cdn.discordapp.com/icons/1526831219373772901/83d5b85c1210f8da072c957d61025b81.webp?size=1024"
-                alt="JACKAL Studios Logo"
-            >
-
-            <div class="eyebrow">
-                REDM DEVELOPMENT • SYSTEMS • COMMUNITY
-            </div>
-
-            <h1>
-                JACKAL <span class="red">STUDIOS</span>
-            </h1>
-
-            <p class="tagline">
-                A professional RedM development studio focused on
-                building quality systems, supporting developers,
-                and working directly with the community.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="button button-primary"
-                    href="https://discord.gg/VQCqzWU3"
-                    target="_blank"
-                >
-                    🐺 JOIN JACKAL
-                </a>
-
-                <a
-                    class="button button-secondary"
-                    href="https://github.com/JACKAL-Development-Studios"
-                    target="_blank"
-                >
-                    ◈ VIEW GITHUB
-                </a>
-
-                       </div>
-
-
-            <div class="discord-panel">
-
-                <div class="discord-info">
-
-                    <div class="discord-icon">
-                        💬
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            JACKAL Studios Community
-                        </h3>
-
-                        <p>
-                            Developers, creators, server owners and
-                            RedM community members working together.
-                        </p>
-
-                        <div class="discord-online">
-
-                            <span class="discord-dot"></span>
-
-                            JACKAL COMMUNITY
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <a
-                    class="button button-primary"
-                    href="https://discord.gg/VQCqzWU3"
-                    target="_blank"
-                >
-                    JOIN DISCORD
-                </a>
-
-            </div>
-
-
-            <div class="stats">
-
-                <div class="stat">
-                    <strong>REDM</strong>
-                    <span>Development</span>
-                </div>
-
-                <div class="stat">
-                    <strong>JACKAL</strong>
-                    <span>Community</span>
-                </div>
-
-                <div class="stat">
-                    <strong>24/7</strong>
-                    <span>Development</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- ABOUT -->
-
-    <section id="about">
-
-        <div class="container">
-
-            <div class="section-title">
-
-                <h2>Built For The Community</h2>
-
-                <p>
-                    Development should be collaborative.
-                </p>
-
-            </div>
-
-            <div class="cards">
-
-                <div class="card">
-
-                    <div class="card-icon">🐺</div>
-
-                    <h3>JACKAL Community</h3>
-
-                    <p>
-                        Connect with developers, server owners,
-                        creators, testers, customers and members
-                        of the RedM community.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-icon">⚙️</div>
-
-                    <h3>Development</h3>
-
-                    <p>
-                        Focused on creating reliable systems,
-                        development tools and solutions for
-                        RedM communities.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-icon">🤝</div>
-
-                    <h3>Collaboration</h3>
-
-                    <p>
-                        Work with the community through feedback,
-                        testing, partnerships and developer
-                        collaboration.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- DEVELOPMENT -->
-
-    <section id="services">
-
-        <div class="container">
-
-            <div class="section-title">
-
-                <h2>JACKAL Development</h2>
-
-                <p>
-                    Built with purpose. Developed without compromise.
-                </p>
-
-            </div>
-
-            <div class="cards">
-
-                <div class="card">
-
-                    <div class="card-icon">💻</div>
-
-                    <h3>RedM Development</h3>
-
-                    <p>
-                        Development focused around the RedM
-                        ecosystem and the needs of server owners
-                        and developers.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-icon">🛡️</div>
-
-                    <h3>Security</h3>
-
-                    <p>
-                        Modern server protection, moderation,
-                        monitoring and security-focused systems.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-icon">🧪</div>
-
-                    <h3>Testing</h3>
-
-                    <p>
-                        Community testing and feedback help
-                        improve systems before they reach
-                        production.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- COMMUNITY -->
-
-    <section id="community">
-
-        <div class="cta">
-
-            <div class="container">
-
-                <h2>
-                    Become Part Of JACKAL
-                </h2>
-
-                <p>
-                    Join the community and help shape what comes next.
-                </p>
-
-                <div class="buttons">
-
-                    <a
-                        class="button button-primary"
-                        href="https://discord.gg/VQCqzWU3"
-                        target="_blank"
-                    >
-                        🐺 JOIN DISCORD
-                    </a>
-
-                    <a
-                        class="button button-secondary"
-                        href="https://github.com/JACKAL-Development-Studios"
-                        target="_blank"
-                    >
-                        GITHUB
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="container">
-
-            © 2026 <strong>JACKAL Studios</strong>
-
-            <br>
-
-            RedM Development • Systems • Community
-
-        </div>
-
-    </footer>
-
-</body>
-</html>
+            ... (31 KB left)
