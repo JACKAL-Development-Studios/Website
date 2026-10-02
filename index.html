@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JACKAL Studios | RedM Development</title>
+
+    <meta
+        name="description"
+        content="JACKAL Studios — RedM development, systems, resources, support, and community."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at 50% 20%, rgba(150, 0, 0, 0.20), transparent 35%),
+                linear-gradient(135deg, #050505, #0b0b0b 50%, #030303);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                );
+            background-size: 50px 50px;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .logo {
+            width: 155px;
+            height: 155px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 28px;
+            border: 2px solid rgba(255,255,255,0.15);
+            box-shadow:
+                0 0 30px rgba(150, 0, 0, 0.30),
+                0 0 80px rgba(150, 0, 0, 0.10);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .eyebrow {
+            color: #aaa;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 9vw, 92px);
+            letter-spacing: 7px;
+            line-height: 1;
+            font-weight: 900;
+        }
+
+        .red {
+            color: #b00000;
+        }
+
+        .tagline {
+            margin: 24px auto;
+            max-width: 650px;
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.25s;
+        }
+
+        .button-primary {
+            color: white;
+            background: #8f0000;
+            border: 1px solid #b00000;
+            box-shadow: 0 10px 30px rgba(120,0,0,0.25);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            background: #b00000;
+            box-shadow: 0 15px 40px rgba(180,0,0,0.35);
+        }
+
+        .button-secondary {
+            color: white;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .button-secondary:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 700px;
+            margin: 70px auto 0;
+        }
+
+        .stat {
+            padding: 22px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .stat span {
+            color: #777;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SERVICES */
+
+        section {
+            padding: 110px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 30px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.05),
+                rgba(255,255,255,0.015)
+            );
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(176,0,0,0.45);
+        }
+
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #888;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            padding: 90px 30px;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(130,0,0,0.18),
+                    transparent 65%
+                );
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 0;
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #888;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: 4px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <div class="container nav-inner">
+
+            <div class="brand">
+
+                <img
+                    src="https://cdn.discordapp.com/icons/1526831219373772901/83d5b85c1210f8da072c957d61025b81.webp?size=1024"
+                    alt="JACKAL Studios"
+                >
+
+                JACKAL STUDIOS
+
+            </div>
+
+            <div class="nav-links">
+
+                <a href="#about">ABOUT</a>
+                <a href="#services">DEVELOPMENT</a>
+                <a href="#community">COMMUNITY</a>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <main class="hero">
+
+        <div class="container hero-content">
+
+            <img
+                class="logo"
+                src="https://cdn.discordapp.com/icons/1526831219373772901/83d5b85c1210f8da072c957d61025b81.webp?size=1024"
+                alt="JACKAL Studios Logo"
+            >
+
+            <div class="eyebrow">
+                REDM DEVELOPMENT • SYSTEMS • COMMUNITY
+            </div>
+
+            <h1>
+                JACKAL <span class="red">STUDIOS</span>
+            </h1>
+
+            <p class="tagline">
+                A professional RedM development studio focused on
+                building quality systems, supporting developers,
+                and working directly with the community.
+            </p>
+
+            <div class="buttons">
+
+                <a
+                    class="button button-primary"
+                    href="https://discord.gg/VQCqzWU3"
+                    target="_blank"
+                >
+                    🐺 JOIN JACKAL
+                </a>
+
+                <a
+                    class="button button-secondary"
+                    href="https://github.com/JACKAL-Development-Studios"
+                    target="_blank"
+                >
+                    ◈ VIEW GITHUB
+                </a>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+                    <strong>REDM</strong>
+                    <span>Development</span>
+                </div>
+
+                <div class="stat">
+                    <strong>JACKAL</strong>
+                    <span>Community</span>
+                </div>
+
+                <div class="stat">
+                    <strong>24/7</strong>
+                    <span>Development</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Built For The Community</h2>
+
+                <p>
+                    Development should be collaborative.
+                </p>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="card-icon">🐺</div>
+
+                    <h3>JACKAL Community</h3>
+
+                    <p>
+                        Connect with developers, server owners,
+                        creators, testers, customers and members
+                        of the RedM community.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">⚙️</div>
+
+                    <h3>Development</h3>
+
+                    <p>
+                        Focused on creating reliable systems,
+                        development tools and solutions for
+                        RedM communities.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">🤝</div>
+
+                    <h3>Collaboration</h3>
+
+                    <p>
+                        Work with the community through feedback,
+                        testing, partnerships and developer
+                        collaboration.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DEVELOPMENT -->
+
+    <section id="services">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>JACKAL Development</h2>
+
+                <p>
+                    Built with purpose. Developed without compromise.
+                </p>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="card-icon">💻</div>
+
+                    <h3>RedM Development</h3>
+
+                    <p>
+                        Development focused around the RedM
+                        ecosystem and the needs of server owners
+                        and developers.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">🛡️</div>
+
+                    <h3>Security</h3>
+
+                    <p>
+                        Modern server protection, moderation,
+                        monitoring and security-focused systems.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">🧪</div>
+
+                    <h3>Testing</h3>
+
+                    <p>
+                        Community testing and feedback help
+                        improve systems before they reach
+                        production.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMMUNITY -->
+
+    <section id="community">
+
+        <div class="cta">
+
+            <div class="container">
+
+                <h2>
+                    Become Part Of JACKAL
+                </h2>
+
+                <p>
+                    Join the community and help shape what comes next.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        class="button button-primary"
+                        href="https://discord.gg/VQCqzWU3"
+                        target="_blank"
+                    >
+                        🐺 JOIN DISCORD
+                    </a>
+
+                    <a
+                        class="button button-secondary"
+                        href="https://github.com/JACKAL-Development-Studios"
+                        target="_blank"
+                    >
+                        GITHUB
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            © 2026 <strong>JACKAL Studios</strong>
+
+            <br>
+
+            RedM Development • Systems • Community
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
